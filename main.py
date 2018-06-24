@@ -59,14 +59,14 @@ def get_faces(image, use_gpu=True):
         top, right, bottom, left = face_location
         face = image[top:bottom, left:right]
         faces.append(face)
-    return faces
+    return faces, face_locations
 
 if __name__ == '__main__':
     input_filename = sys.argv[1]
     input_image = face_recognition.load_image_file(input_filename)
-    input_faces = get_faces(input_image)
+    input_faces, input_face_locations = get_faces(input_image)
 
-    input_embeds = face_recognition.face_encodings(input_image)
+    input_embeds = face_recognition.face_encodings(input_image, input_face_locations)
     for i, face in enumerate(input_faces):
         scipy.misc.imsave('face_{}.jpg'.format(i), face)
 
