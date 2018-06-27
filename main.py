@@ -106,9 +106,11 @@ def load_seat_center(filename):
 if __name__ == '__main__':
     debug = False
     use_gpu = False
-    raw2gallery(use_gpu=use_gpu)
-    seat_configuration('seat.png')
+    raw2gallery(use_gpu=False)
+    #seat_configuration('seat.png')
     gallery = load_gallery('gallery')
+    n_gallery = len(gallery['labels'])
+    threshold = 1  / (n_gallery-1)
 
     query_filename = sys.argv[1]
     query_image = scipy.misc.imread(query_filename, mode='RGB')
@@ -144,11 +146,11 @@ if __name__ == '__main__':
                 score[i][pred],
             ))
 
-        if score[i][pred] < 0.35:
+        if score[i][pred] < threshold:
             student_seats[seat_idx] = 'Unknown'
         else:
             student_seats[seat_idx] = gallery['labels'][pred]
-
+'''
     for r in range(seat_row):
         print('#'*77)
         line = ['']
@@ -158,3 +160,4 @@ if __name__ == '__main__':
         line = '#'.join(line)
         print(line)
     print('#'*77)
+'''
