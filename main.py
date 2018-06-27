@@ -107,7 +107,7 @@ if __name__ == '__main__':
     debug = False
     use_gpu = False
     raw2gallery(use_gpu=use_gpu)
-    #seat_configuration('seat.png')
+    seat_configuration('seat.png')
     gallery = load_gallery('gallery')
 
     query_filename = sys.argv[1]
